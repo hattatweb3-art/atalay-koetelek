@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İçerik Yönetimi | Fatma Atalay Kötelek Hukuk &amp; Danışmanlık</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  body { background: var(--parchment); }
+  .admin-shell { max-width: 880px; margin: 0 auto; padding: 48px 24px 100px; }
+  .admin-header { margin-bottom: 32px; }
+  .admin-header h1 { font-family: var(--font-display); font-size: 30px; margin: 10px 0 6px; }
+  .admin-header p { color: var(--charcoal-soft); font-size: 14.5px; max-width: 62ch; }
+  .lock-card {
+    max-width: 420px;
+    margin: 90px auto;
+    background: var(--off-white);
+    border: 1px solid var(--line);
+    padding: 32px;
+    text-align: center;
+  }
+  .lock-card h2 { font-family: var(--font-display); font-size: 22px; margin: 10px 0 18px; }
+  .lock-card input { width: 100%; padding: 12px 14px; border: 1px solid var(--line); margin-bottom: 14px; font-size: 15px; }
+  .lock-card .err { color: var(--bordo); font-size: 13px; min-height: 18px; margin-bottom: 6px; }
+  .block-card {
+    background: var(--off-white);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brass);
+    padding: 26px;
+    margin-bottom: 22px;
+  }
+  .block-card h2 { font-family: var(--font-display); font-size: 19px; margin: 0 0 4px; }
+  .block-card .sub { font-size: 12.5px; color: var(--brass); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; margin-bottom: 18px; }
+  .img-row { display: flex; gap: 18px; align-items: center; margin-top: 8px; }
+  .img-preview {
+    width: 96px; height: 72px; object-fit: cover; border: 1px solid var(--line);
+    background: var(--parchment); flex-shrink: 0;
+  }
+  .toolbar {
+    position: sticky; bottom: 0;
+    background: rgba(246,241,231,0.96);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid var(--line);
+    padding: 16px 0;
+    display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+    margin-top: 20px;
+  }
+  .status-msg { font-size: 13.5px; color: var(--charcoal-soft); }
+  .status-msg.ok { color: #2E6B3E; font-weight: 600; }
+  .file-input { font-size: 13.5px; }
+  .btn-secondary { background: var(--ink); color: var(--off-white); }
+  .btn-secondary:hover { background: var(--ink-2); }
+  .btn-outline { background: transparent; border: 1px solid var(--line); color: var(--charcoal); }
+  .btn-outline:hover { border-color: var(--brass); color: var(--bordo); }
+  .info-box {
+    background: #FBF3E4; border: 1px solid var(--brass-light);
+    padding: 16px 18px; font-size: 13.5px; color: var(--charcoal-soft);
+    margin-bottom: 26px; line-height: 1.6;
+  }
+  .info-box strong { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- Kilit ekranı -->
+<div class="lock-card" id="lockCard">
+  <span class="eyebrow" style="justify-content:center;">Yönetim Paneli</span>
+  <h2>Devam etmek için parola girin</h2>
+  <input type="password" id="pwInput" placeholder="Parola">
+  <div class="err" id="pwErr"></div>
+  <button class="btn btn-primary" style="width:100%; justify-content:center;" id="pwSubmit">Giriş Yap</button>
+  <p style="font-size:12px; color:var(--charcoal-soft); margin-top:16px;">
+    Not: Bu parola koruması yalnızca tarayıcı tarafında çalışır ve gelişmiş bir güvenlik önlemi değildir; sadece yanlışlıkla içerik değiştirmeyi önlemek içindir. Parolayı admin.js dosyasının en üstünden değiştirebilirsiniz.
+  </p>
+</div>
+
+<!-- Panel içeriği -->
+<div class="admin-shell" id="adminShell" style="display:none;">
+  <div class="admin-header">
+    <span class="eyebrow">İçerik Yönetimi</span>
+    <h1>Güncel Dosyalar — 3 İçerik Bloğu</h1>
+    <p>Aşağıdaki 3 alanı doldurup <strong>“Kaydet”</strong>e bastığınızda değişiklikler bu tarayıcıda saklanır ve ana sayfada (aynı cihazda) hemen görünür. Değişikliklerin <strong>tüm ziyaretçilerde</strong> görünmesi için “JSON Dışa Aktar” ile indirdiğiniz <code>content.json</code> dosyasını GitHub deponuza yükleyip mevcut dosyanın üzerine yazmanız gerekir.</p>
+  </div>
+
+  <div class="info-box">
+    <strong>Nasıl çalışır?</strong><br>
+    1) Metinleri ve görselleri doldurun → 2) “Kaydet” ile tarayıcıya kaydedin ve önizleyin → 3) “JSON Dışa Aktar”a basıp inen <code>content.json</code> dosyasını GitHub deponuzdaki mevcut <code>content.json</code> ile değiştirin → 4) GitHub Pages birkaç dakika içinde günceller.
+  </div>
+
+  <form id="contentForm"></form>
+
+  <div class="toolbar">
+    <button class="btn btn-primary" id="saveBtn" type="button">Kaydet</button>
+    <button class="btn btn-secondary" id="exportBtn" type="button">JSON Dışa Aktar (content.json)</button>
+    <label class="btn btn-outline" for="importFile" style="cursor:pointer;">JSON İçe Aktar</label>
+    <input type="file" id="importFile" accept="application/json" style="display:none;">
+    <button class="btn btn-outline" id="resetBtn" type="button">Tarayıcı Verisini Temizle</button>
+    <span class="status-msg" id="statusMsg"></span>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
